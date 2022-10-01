@@ -91,6 +91,20 @@ def extractAndRenameAllZipsCurrentDirectory():
                 z.printdir()
                 z.extractall(target_dir)
 
+    
+    # In target, unzip each remaining zip then delete it
+    for filename in os.listdir(target_dir):
+        full_path = f'{target_dir}/{filename}'
+        if os.path.isfile(full_path):
+            __, extension = os.path.splitext(filename)
+            extension_lower = extension.lower()
+            print("In target, looking at " + filename + ".  Extension is " + extension)
+            if extension_lower == ".zip":
+                print(f'In target, Found a zip: {filename}, so unzipping then deleting.')
+                with ZipFile(full_path) as z:
+                    z.extractall(target_dir)
+                os.remove(full_path)
+
     for filename in os.listdir(target_dir):
         __, extension = os.path.splitext(filename)
         extension_lower = extension.lower()
