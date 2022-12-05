@@ -1,1 +1,5 @@
+.vscode/
+playground/
 scripts/resources/
+scripts/workspace*
+__pycache__/
